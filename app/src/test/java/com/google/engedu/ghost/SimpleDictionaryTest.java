@@ -18,6 +18,7 @@ package com.google.engedu.ghost;
 
 import junit.framework.Assert;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -30,14 +31,26 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 public class SimpleDictionaryTest {
+    SimpleDictionary dictionary;
 
+    @Before
+    public void setup(){
+        ArrayList<String> list = new ArrayList<>();
+        list.add("dance");
+        list.add("done");
+        list.add("math");
+        list.add("mount");
+        list.add("north");
+
+        dictionary = new SimpleDictionary(list, 0);
+    }
     @Test
     public void testIsWord() {
-        // TODO(you): Add some tests!
+        assertEquals(true, dictionary.isWord("done"));
     }
 
     @Test
     public void testGetAnyWordStartingWith() {
-        // TODO(you): Add some tests!
+        assertEquals("done", dictionary.getAnyWordStartingWith("don"));
     }
 }

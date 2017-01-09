@@ -61,19 +61,67 @@ public class SimpleDictionary implements GhostDictionary {
      */
     @Override
     public boolean isWord(String word) {
-        return words.contains(word);
+        int low = 0;
+        int high = words.size() - 1;
+        int mid = low + (high - low) / 2;
+
+
+        while (low <= high){
+            if (words.get(mid).compareTo(word) == 0){
+                return true;
+            }
+            if (words.get(mid).compareTo(word)< 0){
+
+                low = mid +1;
+
+            }
+            if (words.get(mid).compareTo(word)>0){
+
+                high = mid -1;
+            }
+            mid = low + (high - low) / 2;
+        }
+        return false;
     }
 
     /**
      * Given a prefix, find any word in the dictionary which begins with that prefix, or return null
      * if the dictionary contains no words with that prefix.
      *
+     * use binary search to start
+     * string.compareto
+     * a.comparto(b) returns 0 if equal
+     * < 0 if a is earlier in alphabet than b
+     * > 0 if b comes before a
      * @param prefix
      * @return
      */
     @Override
     public String getAnyWordStartingWith(String prefix) throws NoSuchElementException {
-        // TODO(you): Implement using Binary Search
+
+
+
+        int low = 0;
+        int high = words.size() - 1;
+        int mid = low + (high - low) / 2;
+
+
+        while (low <= high){
+            if (words.get(mid).startsWith(prefix)){
+                return words.get(mid);
+            }
+            if (words.get(mid).compareTo(prefix)< 0){
+
+                low = mid +1;
+
+            }
+            if (words.get(mid).compareTo(prefix)>0){
+
+                high = mid -1;
+            }
+            mid = low + (high - low) / 2;
+        }
+
         return null;
     }
 
@@ -90,6 +138,40 @@ public class SimpleDictionary implements GhostDictionary {
     public String getGoodWordStartingWith(String prefix) {
         String selected = null;
         // TODO(you): Implement using Binary Search + some special magic
+        int low = 0;
+        int high = words.size() - 1;
+        int mid = low + (high - low) / 2;
+
+
+        while (low <= high){
+            if (words.get(mid).startsWith(prefix)){
+
+                selected = words.get(mid);
+                break;
+            }
+            if (words.get(mid).compareTo(prefix)< 0){
+
+                low = mid +1;
+
+            }
+            if (words.get(mid).compareTo(prefix)>0){
+
+                high = mid -1;
+            }
+            mid = low + (high - low) / 2;
+        }
+
+        String word = selected.substring(prefix.length() - 1, selected.length() -1);
+        boolean foundWord = false;
+        while (!foundWord){
+            if (word.length()%2 == 1){
+                foundWord = true;
+            }
+            else{
+                selected = words.get(mid +1);
+            }
+        }
+
         return selected;
     }
 

@@ -31,6 +31,8 @@ import java.io.InputStream;
 import java.util.Random;
 
 
+
+
 public class GhostActivity extends AppCompatActivity {
     private static final String TAG = "GhostActivity";
 
@@ -91,6 +93,7 @@ public class GhostActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    //updates while you type
     @Override
     public boolean onKeyUp(int keyCode, KeyEvent event) {
         int unicode = event.getUnicodeChar();
